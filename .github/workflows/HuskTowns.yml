@@ -21,6 +21,7 @@ jobs:
       
       - name: 'Build HuskTowns .jar'
         run: |
+          rm -rf HuskTowns
           git clone https://github.com/WiIIiam278/HuskTowns
           git config --global user.email "you@example.com"
           git config --global user.name "Your Name"
