@@ -3,6 +3,8 @@ name: Build HuskTowns
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - .github/workflows/HuskTowns.yml
   schedule:
     - cron: '0 0 * * *'
 
