@@ -21,6 +21,6 @@ jobs:
 
       - uses: actions/upload-artifact@v3
         with:
-          name: ${{ path.basename(path.join('HuskTowns', 'build', 'libs', '*')) }}
+          name: HuskTowns
           path: HuskTowns/build/libs/*.jar
 
