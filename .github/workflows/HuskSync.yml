@@ -1,0 +1,33 @@
+name: Build HuskSync
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Temurin JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: "temurin"
+          java-version: "17"
+      
+      - name: 'Build HuskSync .jar'
+        run: |
+          git clone https://github.com/WiIIiam278/HuskSync
+          git config --global user.email "you@example.com"
+          git config --global user.name "Your Name"
+          cd HuskSync
+          ./gradlew clean build
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: HuskSync
+          path: HuskSync/target/*.jar
+
