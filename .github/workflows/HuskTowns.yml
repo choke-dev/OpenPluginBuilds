@@ -1,4 +1,4 @@
-name: Build HuskTowns with Gradle
+name: Build HuskTowns
 
 on:
   push:
@@ -28,5 +28,5 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: HuskTowns
-          path: HuskTowns/build/libs/*.jar
+          path: HuskTowns/target/*.jar
 
