@@ -22,13 +22,14 @@ jobs:
           distribution: "temurin"
           java-version: "17"
       
-      - name: 'Build CustomNameplates .jar'
+      - name: 'Build CustomNameplates .jar' # idk why i have to set gradlew as executable but i guess the repo author forgot that lol
         run: |
           rm -rf Custom-Nameplates
           git clone https://github.com/Xiao-MoMi/Custom-Nameplates
           git config --global user.email "you@example.com"
           git config --global user.name "Your Name"
           cd Custom-Nameplates
+          chmod +x ./gradlew
           ./gradlew build
 
       - uses: actions/upload-artifact@v3
