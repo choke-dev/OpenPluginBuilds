@@ -1,6 +1,6 @@
 <!--suppress ALL -->
 <p align="center">
-    <img src="images/banner.png" alt="HuskSync" />
+    <img src="https://github.com/WiIIiam278/HuskSync/blob/master/images/banner.png" alt="HuskSync" />
     <a href="https://github.com/WiIIiam278/HuskSync/actions/workflows/ci.yml">
         <img src="https://img.shields.io/github/actions/workflow/status/WiIIiam278/HuskSync/ci.yml?branch=master&logo=github"/>
     </a>
