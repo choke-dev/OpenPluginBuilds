@@ -28,6 +28,6 @@
 
 <h1>
 <p align="center">
-<a href="https://nightly.link/choke-dev/Prebuilt-MC-Plugins/workflows/HuskSync/main/HuskSync.zip"><code>Download the latest build</code></a>
+<a href="https://nightly.link/choke-dev/OpenPluginBuilds/workflows/HuskSync/main/HuskSync.zip"><code>Download the latest build</code></a>
 </p>
 </h1>
