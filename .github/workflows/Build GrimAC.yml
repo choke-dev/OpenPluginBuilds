@@ -1,0 +1,35 @@
+name: Build GrimAC
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - .github/workflows/Build GrimAC.yml
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Temurin JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: "temurin"
+          java-version: "17"
+      
+      - name: 'Build HuskTowns .jar'
+        run: |
+          rm -rf Grim
+          git clone https://github.com/GrimAnticheat/Grim
+          git config --global user.email "you@example.com"
+          git config --global user.name "Your Name"
+          cd Grim
+          ./gradlew build
+      - uses: actions/upload-artifact@v3
+        with:
+          name: GrimAC
+          path: Grim/build/libs/*.jar
