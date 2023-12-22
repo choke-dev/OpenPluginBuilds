@@ -21,7 +21,7 @@ jobs:
           distribution: "temurin"
           java-version: "17"
       
-      - name: 'Build HuskTowns .jar'
+      - name: 'Build GrimAC .jar'
         run: |
           rm -rf Grim
           git clone https://github.com/GrimAnticheat/Grim
