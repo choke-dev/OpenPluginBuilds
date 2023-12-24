@@ -1,11 +1,11 @@
-name: Build CustomNameplates
+name: Build Oraxen
 
 on:
   workflow_dispatch:
   push:
     branches: [ "main" ]
     paths:
-      - .github/workflows/CustomNameplates.yml
+      - .github/workflows/Oraxen.yml
   schedule:
     - cron: '0 0 * * *'
 
@@ -22,17 +22,17 @@ jobs:
           distribution: "temurin"
           java-version: "17"
       
-      - name: 'Build CustomNameplates .jar' # idk why i have to set gradlew as executable but i guess the repo author forgot that lol
+      - name: 'Build Oraxen .jar'
         run: |
-          rm -rf Custom-Nameplates
-          git clone https://github.com/Xiao-MoMi/Custom-Nameplates
+          rm -rf oraxen
+          git clone https://github.com/oraxen/oraxen
           git config --global user.email "you@example.com"
           git config --global user.name "Your Name"
-          cd Custom-Nameplates
+          cd oraxen
           chmod +x ./gradlew
           ./gradlew build
 
       - uses: actions/upload-artifact@v3
         with:
-          name: CustomNameplates
-          path: Custom-Nameplates/build/libs/*.jar
+          name: oraxen
+          path: oraxen/build/libs/*.jar
