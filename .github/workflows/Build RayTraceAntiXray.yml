@@ -1,0 +1,36 @@
+name: Build GrimAC
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - .github/workflows/Build RayTraceAntiXray.yml
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Temurin JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: "temurin"
+          java-version: "17"
+      
+      - name: 'Build RayTraceAntiXray .jar'
+        run: |
+          rm -rf RayTraceAntiXray
+          git clone https://github.com/stonar96/RayTraceAntiXray
+          git config --global user.email "you@example.com"
+          git config --global user.name "Your Name"
+          cd RayTraceAntiXray
+          ./compilew
+      - uses: actions/upload-artifact@v4
+        with:
+          name: RayTraceAntiXray
+          path: RayTraceAntiXray/RayTraceAntiXray/target/raytraceantixray-*.jar
