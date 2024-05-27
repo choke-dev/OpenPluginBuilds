@@ -1,4 +1,4 @@
-name: Build GrimAC
+name: Build RayTraceAntiXray
 
 on:
   push:
