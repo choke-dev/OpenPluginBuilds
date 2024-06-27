@@ -1,4 +1,4 @@
-name: Build
+name: Build Coreprotect
 on:
   push:
     branches:
