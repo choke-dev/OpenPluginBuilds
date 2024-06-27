@@ -15,15 +15,15 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Setup Temurin JDK 21
+      - name: Setup Temurin JDK 17
         uses: actions/setup-java@v4.2.1
         with:
           distribution: "temurin"
-          java-version: "21"
+          java-version: "17"
       
       - name: 'Build Coreprotect .jar'
         run: |
-          rm -rf HuskTowns
+          rm -rf Coreprotect
           git clone https://github.com/PlayPro/Coreprotect
           git config --global user.email "you@example.com"
           git config --global user.name "Your Name"
