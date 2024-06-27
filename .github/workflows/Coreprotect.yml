@@ -1,10 +1,13 @@
 name: Build Coreprotect
 on:
   push:
-    branches:
-      - master
-  pull_request:
-    types: [opened, synchronize, reopened]
+    branches: [ "main" ]
+    paths:
+      - .github/workflows/Build RayTraceAntiXray.yml
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+  
 jobs:
   build:
     name: Build
