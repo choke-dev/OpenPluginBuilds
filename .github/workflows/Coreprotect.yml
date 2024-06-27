@@ -27,7 +27,7 @@ jobs:
           git clone https://github.com/PlayPro/Coreprotect
           git config --global user.email "you@example.com"
           git config --global user.name "Your Name"
-          cd HuskTowns
+          cd Coreprotect
           gradle clean build
 
       - uses: actions/upload-artifact@v3
