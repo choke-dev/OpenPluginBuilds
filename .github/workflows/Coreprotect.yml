@@ -1,0 +1,36 @@
+name: Build Coreprotect
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - .github/workflows/Coreprotect.yml
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Temurin JDK 21
+        uses: actions/setup-java@v4.2.1
+        with:
+          distribution: "temurin"
+          java-version: "21"
+      
+      - name: 'Build Coreprotect .jar'
+        run: |
+          rm -rf HuskTowns
+          git clone https://github.com/PlayPro/Coreprotect
+          git config --global user.email "you@example.com"
+          git config --global user.name "Your Name"
+          cd HuskTowns
+          gradle clean build
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: Coreprotect
+          path: Coreprotect/target/*.jar
