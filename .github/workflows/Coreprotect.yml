@@ -1,10 +1,10 @@
-name: Build Coreprotect
+name: Build CoreProtect
 
 on:
   push:
     branches: [ "main" ]
     paths:
-      - .github/workflows/Build Coreprotect.yml
+      - .github/workflows/Build_CoreProtect.yml
   schedule:
     - cron: '0 0 * * *'
   workflow_dispatch:
@@ -14,48 +14,33 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # Step 1: Check if CoreProtect repository exists, clone or update accordingly
-    - name: Clone or update CoreProtect repository
-      run: |
-        if [ -d "CoreProtect" ]; then
-          echo "CoreProtect repository exists. Pulling latest changes."
-          cd CoreProtect
-          git pull
-        else
-          echo "Cloning CoreProtect repository."
-          git clone https://github.com/PlayPro/CoreProtect.git
-        fi
+      - name: Clone or update CoreProtect repository
+        run: |
+          if [ -d "CoreProtect" ]; then
+            echo "Repository exists. Updating..."
+            cd CoreProtect && git pull
+          else
+            echo "Cloning repository..."
+            git clone https://github.com/PlayPro/CoreProtect.git
+          fi
 
-    # Step 2: Set up JDK 21
-    - name: Set up JDK 21
-      uses: actions/setup-java@v3
-      with:
-        distribution: 'temurin'
-        java-version: '21'
+      - name: Set up JDK 21 and Maven cache
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+          cache: 'maven'
 
-    # Step 3: Set up Maven
-    - name: Set up Maven
-      uses: actions/setup-java@v3
-      with:
-        distribution: 'temurin'
-        java-version: '21'
-        cache: 'maven'
+      - name: Modify plugin.yml file
+        working-directory: CoreProtect
+        run: sed -i 's/\${project.branch}/development/' src/main/resources/plugin.yml
 
-    # Step 4: Modify the plugin.yml file
-    - name: Modify plugin.yml
-      run: |
-        cd CoreProtect
-        sed -i 's/${project.branch}/development/' src/main/resources/plugin.yml
+      - name: Build CoreProtect plugin
+        working-directory: CoreProtect
+        run: mvn clean install
 
-    # Step 5: Build the plugin
-    - name: Build CoreProtect
-      run: |
-        cd CoreProtect
-        mvn clean install
-
-    # Step 6: Save the output
-    - name: Upload JAR artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: coreprotect-jar
-        path: CoreProtect/target/CoreProtect-*.jar
+      - name: Upload JAR artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: coreprotect-jar
+          path: CoreProtect/target/CoreProtect-*.jar
